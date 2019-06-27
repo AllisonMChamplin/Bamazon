@@ -14,13 +14,69 @@ connection.connect(function (err) {
     readProducts();
 });
 
-
 function readProducts() {
     console.log("Selecting all products...\n");
-    connection.query("SELECT * FROM products", function (err, res) {
+    connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
-        // Log all results of the SELECT statement
-        console.log(res);
-        connection.end();
+        for (var i = 0; i < results.length; i++) {
+            console.log("$" + results[i].price + " || " + results[i].product_name + " || " + results[i].item_id + " || " + " Quantity: " + results[i].stock_quantity);
+        }
+        // console.log(results);
+        buyProduct();
     });
+}
+
+function buyProduct() {
+    inquirer
+        .prompt([
+            {
+                name: "choice",
+                type: "input",
+                message: "Enter the ID of the product you would like to buy: "
+            },
+            {
+                name: "qty",
+                type: "input",
+                message: "Enter the quantity: "
+            }
+        ])
+        .then(function (answer) {
+            connection.query("SELECT * FROM products", function (err, results) {
+                var chosenItem;
+                if (err) throw err;
+                for (var i = 0; i < results.length; i++) {
+                    if (results[i].item_id === parseInt(answer.choice)) {
+                        chosenItem = results[i];
+                    }
+                }
+                console.log("YOU PICKED: ", chosenItem.product_name);
+
+                if (chosenItem.stock_quantity > parseInt(answer.qty)) {
+                    var newQuantity = chosenItem.stock_quantity - parseInt(answer.qty);
+                    connection.query(
+                        "UPDATE products SET ? WHERE ?",
+                        [
+                            {
+                                stock_quantity: newQuantity
+                            },
+                            {
+                                item_id: answer.choice
+                            }
+                        ],
+                        function (error) {
+                            if (error) throw err;
+                            console.log("Update successful!");
+                            // connection.end();
+                            readProducts();
+                        }
+                    );
+                }
+                else {
+                    console.log("Not enough inventory. Try again...");
+                    readProducts();
+                    connection.end();
+                }
+
+            })
+        })
 }

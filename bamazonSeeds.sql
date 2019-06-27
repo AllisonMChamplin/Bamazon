@@ -16,22 +16,22 @@ INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("skateboard", "sporting goods", 28.95, 10);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("paddle board", "sporting goods", 458.00, 5);
+VALUES ("diving goggles", "sporting goods", 58.04, 5);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("eucalyptus wreath", "decor", 18.95, 5);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("ceramic teapot", "decor", 68.90, 2);
+VALUES ("ceramic teapot", "decor", 68.94, 2);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("skittles", "grocery", 1.00, 20);
+VALUES ("skittles", "grocery", 10.99, 20);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("popcorn", "grocery", 1.00, 20);
+VALUES ("popcorn", "grocery", 14.04, 20);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("cauliflower rice", "grocery", 1.00, 20);
+VALUES ("cauliflower rice", "grocery", 13.21, 20);
 
 
 

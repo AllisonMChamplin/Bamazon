@@ -83,3 +83,16 @@ function viewProducts() {
         mainMenu();
     });
 }
+
+function viewLowInventory() {
+    console.log("\nDisplaying products with low inventory...\n");
+    connection.query("SELECT * FROM products WHERE stock_quantity < 5", function (err, results) {
+        if (err) throw err;
+        for (var i = 0; i < results.length; i++) {
+            console.log("$" + results[i].price + " || " + results[i].product_name + " || " + results[i].item_id + " || " + " Units: " + results[i].stock_quantity);
+        }
+        console.log("\n");
+        mainMenu();
+    });
+}
+

@@ -19,7 +19,7 @@ function mainMenu() {
         .prompt({
             name: "action",
             type: "list",
-            message: "What would you like to do?",
+            message: "\n What would you like to do?",
             choices: [
                 "View Products for Sale",
                 "View Low Inventory",
@@ -83,12 +83,12 @@ function addToInventory() {
             {
                 name: "choice",
                 type: "input",
-                message: "Enter the ID of the product to update its inventory: "
+                message: "Enter the ID of the product to add to its inventory: "
             },
             {
                 name: "qty",
                 type: "input",
-                message: "Enter the number of units: "
+                message: "Enter the number of new units: "
             }
         ])
         .then(function (answer) {
@@ -101,7 +101,7 @@ function addToInventory() {
                     }
                 }
                 console.log("\nYour selection: " + chosenItem.product_name + " \nUnits: " + parseInt(answer.qty));
-                var newInventoryTotal = parseInt(answer.qty);
+                var newInventoryTotal = parseInt(chosenItem.stock_quantity) + parseInt(answer.qty);
                 connection.query(
                     "UPDATE products SET ? WHERE ?",
                     [

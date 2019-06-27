@@ -15,13 +15,13 @@ connection.connect(function (err) {
 });
 
 function readProducts() {
-    console.log("Selecting all products...\n");
+    console.log("\nDisplaying all products...\n");
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
         for (var i = 0; i < results.length; i++) {
-            console.log("$" + results[i].price + " || " + results[i].product_name + " || " + results[i].item_id + " || " + " Quantity: " + results[i].stock_quantity);
+            console.log("$" + results[i].price + " || " + results[i].product_name + " || " + results[i].item_id + " || " + " Units: " + results[i].stock_quantity);
         }
-        // console.log(results);
+        console.log("\n");
         buyProduct();
     });
 }
@@ -37,7 +37,7 @@ function buyProduct() {
             {
                 name: "qty",
                 type: "input",
-                message: "Enter the quantity: "
+                message: "Enter the number of units: "
             }
         ])
         .then(function (answer) {
@@ -49,10 +49,12 @@ function buyProduct() {
                         chosenItem = results[i];
                     }
                 }
-                console.log("YOU PICKED: ", chosenItem.product_name);
-
+                console.log("\nYour selection: " + chosenItem.product_name + " \nUnits: " + parseInt(answer.qty));
                 if (chosenItem.stock_quantity > parseInt(answer.qty)) {
                     var newQuantity = chosenItem.stock_quantity - parseInt(answer.qty);
+                    var price = chosenItem.price;
+                    console.log("Your total: " + "$" + (parseInt(answer.qty) * price));
+
                     connection.query(
                         "UPDATE products SET ? WHERE ?",
                         [
@@ -65,18 +67,18 @@ function buyProduct() {
                         ],
                         function (error) {
                             if (error) throw err;
-                            console.log("Update successful!");
+                            console.log("\nUpdate successful!");
                             // connection.end();
+                            // console.log("price ", price);
                             readProducts();
                         }
                     );
                 }
                 else {
-                    console.log("Not enough inventory. Try again...");
+                    console.log("\nNot enough inventory. Try again... \n");
                     readProducts();
-                    connection.end();
                 }
-
             })
         })
 }
+// connection.end();

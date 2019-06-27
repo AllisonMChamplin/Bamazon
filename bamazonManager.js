@@ -53,25 +53,6 @@ function mainMenu() {
         });
 }
 
-// function viewProducts() {
-//     inquirer
-//         .prompt({
-//             name: "product",
-//             type: "input",
-//             message: "What product would you like to search for?"
-//         })
-//         .then(function (answer) {
-//             var query = "SELECT position, song, year FROM top5000 WHERE ?";
-//             connection.query(query, { product: answer.product }, function (err, res) {
-//                 if (err) throw err;
-//                 for (var i = 0; i < res.length; i++) {
-//                     console.log("Position: " + res[i].position + " || Song: " + res[i].song + " || Year: " + res[i].year);
-//                 }
-//                 mainMenu();
-//             });
-//         });
-// }
-
 function viewProducts() {
     console.log("\nDisplaying all products...\n");
     connection.query("SELECT * FROM products", function (err, results) {
@@ -95,4 +76,50 @@ function viewLowInventory() {
         mainMenu();
     });
 }
+
+function addToInventory() {
+    inquirer
+        .prompt([
+            {
+                name: "choice",
+                type: "input",
+                message: "Enter the ID of the product to update its inventory: "
+            },
+            {
+                name: "qty",
+                type: "input",
+                message: "Enter the number of units: "
+            }
+        ])
+        .then(function (answer) {
+            connection.query("SELECT * FROM products", function (err, results) {
+                var chosenItem;
+                if (err) throw err;
+                for (var i = 0; i < results.length; i++) {
+                    if (results[i].item_id === parseInt(answer.choice)) {
+                        chosenItem = results[i];
+                    }
+                }
+                console.log("\nYour selection: " + chosenItem.product_name + " \nUnits: " + parseInt(answer.qty));
+                var newInventoryTotal = parseInt(answer.qty);
+                connection.query(
+                    "UPDATE products SET ? WHERE ?",
+                    [
+                        {
+                            stock_quantity: newInventoryTotal
+                        },
+                        {
+                            item_id: answer.choice
+                        }
+                    ],
+                    function (error) {
+                        if (error) throw err;
+                        console.log("\nUpdate successful!");
+                        viewProducts();
+                    }
+                );
+            });
+        })
+}
+
 

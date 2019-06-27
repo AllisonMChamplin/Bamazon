@@ -9,6 +9,7 @@ CREATE TABLE products (
   department_name VARCHAR(100) NULL,
   price DECIMAL(10,2) NOT NULL,
   stock_quantity INT NOT NULL,  
+  product_sales DECIMAL (10,2) NULL,
   PRIMARY KEY (item_id)
 );
 
@@ -35,4 +36,13 @@ VALUES ("cauliflower rice", "grocery", 13.21, 20);
 
 
 
-SELECT * FROM products;
+CREATE TABLE departments (
+  department_id INT NOT NULL AUTO_INCREMENT,
+  department_name VARCHAR(100) NULL,
+  over_head_costs DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (department_id)
+);
+
+INSERT INTO departments (department_name, over_head_costs)
+VALUES ("Wassup", 20.00)
+

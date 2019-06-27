@@ -14,25 +14,25 @@ CREATE TABLE products (
 );
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("skateboard", "sporting goods", 28.95, 10);
+VALUES ("Skateboard", "Sporting Goods", 28.95, 10);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("diving goggles", "sporting goods", 58.04, 5);
+VALUES ("Diving Goggles", "Sporting Goods", 58.04, 5);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("eucalyptus wreath", "decor", 18.95, 5);
+VALUES ("Eucalyptus Wreath", "Decor", 18.95, 5);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("ceramic teapot", "decor", 68.94, 2);
+VALUES ("Ceramic Teapot", "Decor", 68.94, 2);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("skittles", "grocery", 10.99, 20);
+VALUES ("Steak", "Grocery", 10.99, 20);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("popcorn", "grocery", 14.04, 20);
+VALUES ("Popcorn", "Grocery", 14.04, 20);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("cauliflower rice", "grocery", 13.21, 20);
+VALUES ("Cauliflower Rice", "Grocery", 13.21, 20);
 
 
 
@@ -44,5 +44,11 @@ CREATE TABLE departments (
 );
 
 INSERT INTO departments (department_name, over_head_costs)
-VALUES ("Wassup", 20.00)
+VALUES ("Sporting Goods", 20.00);
+
+INSERT INTO departments (department_name, over_head_costs)
+VALUES ("Decor", 20.00);
+
+INSERT INTO departments (department_name, over_head_costs)
+VALUES ("Grocery", 20.00);
 

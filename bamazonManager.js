@@ -69,8 +69,7 @@ function viewProducts() {
             t.cell('Product Sales: ', res.product_sales, Table.number(2))
             t.newRow()
         })
-        console.log(t.toString())
-
+        console.log(t.toString());
         console.log("\n");
         mainMenu();
     });
@@ -90,10 +89,7 @@ function viewLowInventory() {
             t.cell('Product Sales: ', res.product_sales, Table.number(2))
             t.newRow()
         })
-        console.log(t.toString())
-
-        // console.log(Table.print(results));
-
+        console.log(t.toString());
         console.log("\n");
         mainMenu();
     });

@@ -19,11 +19,17 @@ function readProducts() {
     console.log("\nDisplaying all products...\n");
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
-        // for (var i = 0; i < results.length; i++) {
-        //     console.log("$" + results[i].price + " || " + results[i].product_name + " || " + results[i].item_id + " || " + " Units: " + results[i].stock_quantity);
-        // }
-        console.log(Table.print(results));
-        
+
+        var t = new Table;
+        results.forEach(function (res) {
+            t.cell('Product Name: ', res.product_name)
+            t.cell('ID: ', res.item_id)
+            t.cell('Department Name: ', res.department_name)
+            t.cell('Price: ', res.price, Table.number(2))
+            t.cell('Stock Quantity: ', res.stock_quantity)
+            t.newRow()
+        })
+        console.log(t.toString());
         console.log("\n");
         buyProduct();
     });
@@ -66,7 +72,7 @@ function buyProduct() {
 
                     var total = parseInt(answer.qty) * price;
                     total = parseFloat(Math.round(total * 100) / 100).toFixed(2);
-                    
+
                     console.log("Your total: " + "$" + total);
 
                     connection.query(

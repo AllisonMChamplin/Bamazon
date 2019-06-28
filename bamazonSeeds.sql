@@ -14,25 +14,25 @@ CREATE TABLE products (
 );
 
 INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales)
-VALUES ("Skateboard", "Sporting Goods", 28.95, 10, 0);
+VALUES ("Skateboard", "Sporting Goods", 28.95, 10, 0.00);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales)
-VALUES ("Diving Goggles", "Sporting Goods", 58.04, 5, 0);
+VALUES ("Diving Goggles", "Sporting Goods", 58.04, 5, 0.00);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales)
-VALUES ("Eucalyptus Wreath", "Decor", 18.95, 5, 0);
+VALUES ("Eucalyptus Wreath", "Decor", 18.95, 5, 0.00);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales)
-VALUES ("Ceramic Teapot", "Decor", 68.94, 2, 0);
+VALUES ("Ceramic Teapot", "Decor", 68.94, 2, 0.00);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales)
-VALUES ("Steak", "Grocery", 10.99, 20, 0);
+VALUES ("Steak", "Grocery", 10.99, 20, 0.00);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales)
-VALUES ("Popcorn", "Grocery", 14.04, 20, 0);
+VALUES ("Popcorn", "Grocery", 14.04, 20, 0.00);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales)
-VALUES ("Cauliflower Rice", "Grocery", 13.21, 20, 0);
+VALUES ("Cauliflower Rice", "Grocery", 13.21, 20, 0.00);
 
 
 

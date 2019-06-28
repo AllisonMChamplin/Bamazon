@@ -55,14 +55,21 @@ function mainMenu() {
 }
 
 function viewProducts() {
-    console.log("\nDisplaying all products...\n");
+    console.log("\n Displaying all products...\n");
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
-        // for (var i = 0; i < results.length; i++) {
-        //     console.log("$" + results[i].price + " || " + results[i].product_name + " || " + results[i].item_id + " || " + " Units: " + results[i].stock_quantity);
-        // }
 
-        console.log(Table.print(results));
+        var t = new Table;
+        results.forEach(function (res) {
+            t.cell('Product Name: ', res.product_name)
+            t.cell('ID: ', res.item_id)
+            t.cell('Department Name: ', res.department_name)
+            t.cell('Price: ', res.price, Table.number(2))
+            t.cell('Stock Quantity: ', res.stock_quantity)
+            t.cell('Product Sales: ', res.product_sales, Table.number(2))
+            t.newRow()
+        })
+        console.log(t.toString())
 
         console.log("\n");
         mainMenu();
@@ -72,11 +79,20 @@ function viewProducts() {
 function viewLowInventory() {
     console.log("\nDisplaying products with low inventory...\n");
     connection.query("SELECT * FROM products WHERE stock_quantity < 5", function (err, results) {
-        // if (err) throw err;
-        // for (var i = 0; i < results.length; i++) {
-        //     console.log("$" + results[i].price + " || " + results[i].product_name + " || " + results[i].item_id + " || " + " Units: " + results[i].stock_quantity);
-        // }
-        console.log(Table.print(results));
+
+        var t = new Table;
+        results.forEach(function (res) {
+            t.cell('Product Name: ', res.product_name)
+            t.cell('ID: ', res.item_id)
+            t.cell('Department Name: ', res.department_name)
+            t.cell('Price: ', res.price, Table.number(2))
+            t.cell('Stock Quantity: ', res.stock_quantity)
+            t.cell('Product Sales: ', res.product_sales, Table.number(2))
+            t.newRow()
+        })
+        console.log(t.toString())
+
+        // console.log(Table.print(results));
 
         console.log("\n");
         mainMenu();

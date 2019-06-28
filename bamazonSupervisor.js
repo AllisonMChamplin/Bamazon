@@ -47,10 +47,33 @@ function mainMenu() {
 function viewProductSalesbyDepartment() {
     console.log("\nDisplaying product sales by department...\n");
     connection.query(
-        "SELECT departments.department_id, departments.department_name, departments.over_head_costs, products.department_name, SUM(products.product_sales) AS product_sales FROM departments INNER JOIN products ON departments.department_name = products.department_name GROUP BY departments.department_name", function (err, res) {
+        "SELECT departments.department_id, departments.department_name, departments.over_head_costs, products.department_name, SUM(products.product_sales) AS product_sales, (SUM(products.product_sales) - departments.over_head_costs) AS total_profit FROM departments INNER JOIN products ON departments.department_name = products.department_name GROUP BY departments.department_name", function (err, res) {
             if (err) throw err;
             console.log("\n");
             console.log(res);
+
+            console.log("\n\n****\n");
+
+            console.log(Table.print(res));
+
+            // var data = [
+            //     { id: 123123, desc: 'Something awesome', price: 1000.00 },
+            //     { id: 245452, desc: 'Very interesting book', price: 11.45 },
+            //     { id: 232323, desc: 'Yet another product', price: 555.55 }
+            // ]
+
+            // var t = new Table;
+
+            // data.forEach(function (product) {
+            //     t.cell('Product Id', product.id)
+            //     t.cell('Description', product.desc)
+            //     t.cell('Price, USD', product.price, Table.number(2))
+            //     t.newRow()
+            // })
+
+            // console.log(t.toString());
+
+            console.log("\n\n****\n");
             console.log("\n");
             console.log("\n");
             mainMenu();

@@ -52,16 +52,21 @@ function buyProduct() {
                         chosenItem = results[i];
                     }
                 }
-                console.log("\nYour selection: " + chosenItem.product_name + " \nUnits: " + parseInt(answer.qty));
+                console.log("\nYour selection: \n" + chosenItem.product_name + " \nUnits: " + parseInt(answer.qty));
                 if (chosenItem.stock_quantity > parseInt(answer.qty)) {
                     var newQuantity = chosenItem.stock_quantity - parseInt(answer.qty);
 
-                    console.log("newQuantity: ", newQuantity);
+                    // console.log("newQuantity: ", newQuantity);
 
                     var price = chosenItem.price;
-                    console.log("price: ", price);
+                    // console.log("Unit Price: " + "$" + price);
+                    price = parseFloat(Math.round(price * 100) / 100).toFixed(2);
 
-                    var total = parseInt(answer.qty) * price
+                    console.log("Unit Price: " + "$" + price);
+
+                    var total = parseInt(answer.qty) * price;
+                    total = parseFloat(Math.round(total * 100) / 100).toFixed(2);
+                    
                     console.log("Your total: " + "$" + total);
 
                     connection.query(

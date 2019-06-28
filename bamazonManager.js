@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+var Table = require('easy-table')
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -19,7 +20,7 @@ function mainMenu() {
         .prompt({
             name: "action",
             type: "list",
-            message: "\n What would you like to do?",
+            message: "\n * * * Bamazon Manager Menu * * * \n\n What would you like to do?",
             choices: [
                 "View Products for Sale",
                 "View Low Inventory",
@@ -57,9 +58,12 @@ function viewProducts() {
     console.log("\nDisplaying all products...\n");
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
-        for (var i = 0; i < results.length; i++) {
-            console.log("$" + results[i].price + " || " + results[i].product_name + " || " + results[i].item_id + " || " + " Units: " + results[i].stock_quantity);
-        }
+        // for (var i = 0; i < results.length; i++) {
+        //     console.log("$" + results[i].price + " || " + results[i].product_name + " || " + results[i].item_id + " || " + " Units: " + results[i].stock_quantity);
+        // }
+
+        console.log(Table.print(results));
+
         console.log("\n");
         mainMenu();
     });
@@ -68,10 +72,12 @@ function viewProducts() {
 function viewLowInventory() {
     console.log("\nDisplaying products with low inventory...\n");
     connection.query("SELECT * FROM products WHERE stock_quantity < 5", function (err, results) {
-        if (err) throw err;
-        for (var i = 0; i < results.length; i++) {
-            console.log("$" + results[i].price + " || " + results[i].product_name + " || " + results[i].item_id + " || " + " Units: " + results[i].stock_quantity);
-        }
+        // if (err) throw err;
+        // for (var i = 0; i < results.length; i++) {
+        //     console.log("$" + results[i].price + " || " + results[i].product_name + " || " + results[i].item_id + " || " + " Units: " + results[i].stock_quantity);
+        // }
+        console.log(Table.print(results));
+
         console.log("\n");
         mainMenu();
     });
@@ -155,7 +161,8 @@ function addNewProduct() {
                     product_name: answer.product,
                     department_name: answer.department,
                     price: price,
-                    stock_quantity: stock
+                    stock_quantity: stock,
+                    product_sales: 0
                 },
                 function (err, res) {
                     if (err) throw err;

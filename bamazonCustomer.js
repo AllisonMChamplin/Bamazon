@@ -16,6 +16,7 @@ connection.connect(function (err) {
 });
 
 function readProducts() {
+    console.log("\n * * * Welcome to Bamazon! * * * \n");
     console.log("\nDisplaying all products...\n");
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;

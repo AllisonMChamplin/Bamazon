@@ -52,7 +52,12 @@ function buyProduct() {
                 console.log("\nYour selection: " + chosenItem.product_name + " \nUnits: " + parseInt(answer.qty));
                 if (chosenItem.stock_quantity > parseInt(answer.qty)) {
                     var newQuantity = chosenItem.stock_quantity - parseInt(answer.qty);
+
+                    console.log("newQuantity: ", newQuantity);
+
                     var price = chosenItem.price;
+                    console.log("price: ", price);
+
                     var total = parseInt(answer.qty) * price
                     console.log("Your total: " + "$" + total);
 
@@ -61,7 +66,7 @@ function buyProduct() {
                         [
                             {
                                 stock_quantity: newQuantity,
-                                product_sales: total
+                                product_sales: total,
                             },
                             {
                                 item_id: answer.choice
@@ -69,6 +74,8 @@ function buyProduct() {
                         ],
                         function (error) {
                             if (error) throw err;
+                            // if (error) console.log(error);
+
                             console.log("\nUpdate successful!");
                             // connection.end();
                             // console.log("price ", price);
